@@ -1,0 +1,12 @@
+[
+  {
+    "ContainingType": "server.Controller.EcommerceController",
+    "Method": "GetProducts",
+    "RelativePath": "api/Ecommerce/get-products",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]

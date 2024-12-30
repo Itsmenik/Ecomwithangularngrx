@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Admin\\Desktop\\Angular_Info\\AngularEcommerceApplication\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8B958594-71A4-4C72-91CF-A80F04062568}|server\\server.csproj|c:\\users\\admin\\desktop\\angular_info\\angularecommerceapplication\\server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B958594-71A4-4C72-91CF-A80F04062568}|server\\server.csproj|solutionrelative:server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B958594-71A4-4C72-91CF-A80F04062568}|server\\server.csproj|c:\\users\\admin\\desktop\\angular_info\\angularecommerceapplication\\server\\server.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{8B958594-71A4-4C72-91CF-A80F04062568}|server\\server.csproj|solutionrelative:server\\server.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B958594-71A4-4C72-91CF-A80F04062568}|server\\server.csproj|c:\\users\\admin\\desktop\\angular_info\\angularecommerceapplication\\server\\controller\\ecommercecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B958594-71A4-4C72-91CF-A80F04062568}|server\\server.csproj|solutionrelative:server\\controller\\ecommercecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B958594-71A4-4C72-91CF-A80F04062568}|server\\server.csproj|c:\\users\\admin\\desktop\\angular_info\\angularecommerceapplication\\server\\model\\ecommercemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B958594-71A4-4C72-91CF-A80F04062568}|server\\server.csproj|solutionrelative:server\\model\\ecommercemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "EcommerceModel.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Angular_Info\\AngularEcommerceApplication\\server\\Model\\EcommerceModel.cs",
+              "RelativeDocumentMoniker": "server\\Model\\EcommerceModel.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Angular_Info\\AngularEcommerceApplication\\server\\Model\\EcommerceModel.cs",
+              "RelativeToolTip": "server\\Model\\EcommerceModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-26T04:36:54.932Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EcommerceController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Angular_Info\\AngularEcommerceApplication\\server\\Controller\\EcommerceController.cs",
+              "RelativeDocumentMoniker": "server\\Controller\\EcommerceController.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Angular_Info\\AngularEcommerceApplication\\server\\Controller\\EcommerceController.cs",
+              "RelativeToolTip": "server\\Controller\\EcommerceController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-26T04:34:56.208Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "server",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Angular_Info\\AngularEcommerceApplication\\server\\server.csproj",
+              "RelativeDocumentMoniker": "server\\server.csproj",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Angular_Info\\AngularEcommerceApplication\\server\\server.csproj",
+              "RelativeToolTip": "server\\server.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-12-26T04:27:33.166Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Desktop\\Angular_Info\\AngularEcommerceApplication\\server\\Program.cs",
+              "RelativeDocumentMoniker": "server\\Program.cs",
+              "ToolTip": "C:\\Users\\Admin\\Desktop\\Angular_Info\\AngularEcommerceApplication\\server\\Program.cs",
+              "RelativeToolTip": "server\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-26T04:29:58.9Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

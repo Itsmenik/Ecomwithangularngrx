@@ -1,0 +1,284 @@
+--> Install the dotnet version  8 
+then check the version dotnet --version ]
+ 
+-->for the web api --> dotnet new webapi(template name) -n server(folder name ) 
+==> (dotnet build ) to build the project 
+==> (dotnet run) to run the project  
+==> (then create the new project =>( ng new client --no-standalone (beacause we are creating the project with the module based arch))) 
+==> (then we have  to create folder name core --> ) ng g m core then shared , then layout  
+
+========================================================== 
+under the layout we have to create  (component in the layout  -->  home ,header , footer ) 
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+Every thing and Now we are using the nagular  (((ngrx))) 
+---------> ((((NGRX))) 
+
+--> (first we have to crete the action then in that we have to mention the case and the data and the data i 
+)
+and have to  mention the data that is coming in the propse here isthe code  
+
+import { createAction, props } from "@ngrx/store";
+export const loadCategory = createAction('Load Category');  
+export const loadCategorySuccess = createAction('Load Category Success', props<{ category: any[]}>()); //first arg wil be the type fo the arg then we have to mention the what is coming  in that what is coming 
+
+export const loadCategoryFailed  = createAction('Loading Category Failed', props<{error:any}>());   
+
+=========================================================================================== 
+then we have to go into the reducer and where we have to mention the   
+for the  next approach for the --->(Reducer) we have to define the type of the state 
+then store    
+____________________________________________________________ h 
+here is the implementation of the Reducer 
+import { createReducer, on } from '@ngrx/store';
+import { Category } from '../../Core/Models/category.model'; 
+import { loadCategory ,loadCategoryFailed,loadCategorySuccess } from './catlog.action';
+
+// Define the shape of the state
+export interface CategoryState {
+  categories: Category[]; // Store the list of categories
+  error: string | null;    // To store any error messages
+}
+
+// Define the initial state (generally in the initial state the the array will remain empty 
+
+export const initialState: CategoryState = {
+  categories: [],
+  error: null
+};
+
+// Define the reducer
+export const categoryReducer = createReducer(
+  initialState, // The initial state
+  // //When the 'loadCategory' action is dispatched, the state remains unchanged.
+  on(loadCategory, (state) => ({ ...state })),
+  // When the 'loadCategorySuccess' action is dispatched, we update the state with the new categories.
+  on(loadCategorySuccess, (state, { categories }) => ({
+    ...state, //  we load the initial state  
+    categories,   // Update the categories in the state
+    error: null   // Reset the error
+  })),
+  // Handle loadCategoryFailure if there is an error
+  on(loadCategoryFailed, (state, { error }) => ({
+    ...state, 
+    error // Update the error state
+  }))
+);
+
+===================================================================== 
+here we are creating the efffect -->  
+
+import { Injectable } from "@angular/core"
+import { createEffect, ofType } from "@ngrx/effects"
+import { Actions } from "@ngrx/effects"
+import { loadCategory, loadCategorySuccess } from "./catlog.action"
+import { mergeMap ,of} from "rxjs"
+
+
+//for the effect we have to create the Effect class service (service is always ingectable  
+
+@Injectable()
+export class CatalogEffect { 
+    constructor(private action$: Actions) {}
+    loadCategories$ = createEffect(()=>
+       this.action$.pipe(
+        ofType(loadCategory), ///when type of the action is loadcategory 
+        mergeMap(()=>of(loadCategorySuccess({categories: []}))) //in that we have to call the looadCategorySucess which have the categories of array 
+       )
+    )
+}  
+
+_______________________________________________________________________________________ 
+then we hve to create the services and after that a serices and then the interceptor 
+import { HttpInterceptor , HttpRequest,HttpHandler, HttpEvent} from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { environment } from "../../../environments/environment.development";
+import { Observable } from "rxjs"; 
+
+
+@Injectable()
+export class  Apinterceptor implements HttpInterceptor{
+   constructor(){}
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+     if(!req.url.startsWith('http')){
+       const apireq = req.clone({
+         url:`${environment.baseapi}/${req.url}`  //basically we are modiyfining the url that we are sending from the backend 
+       });
+       return next.handle(apireq);
+     }
+     return next.handle(req);
+  }
+  }
+====================================================================== 
+Now we are going to create a token class that helps us in the authentcation 
+(WE are directly acessing the base api without any authentication for now we are going template
+auth in the intercecptor becore reaching out to the base api 
+) 
+here is  the code ====>  
+import { InjectionToken } from "@angular/core";
+export const Bast_API = new InjectionToken<string>('Bast_API'); // we are creating the token for the base api  
+ 
+---------------------------------------------- 
+in the interceptor  in the constructor 
+constructor(@Inject(Bast_API) private apiUrl:string ){} // getting the value from the  Bast_API and then 
+assigning the apiUrl for that value  
+and then in the url we will pass this --. (( url:`${this.apiUrl}/${req.url}` ))
+ 
+==========================================================================================  
+Now we will provide will provide both these value in the (app.module.ts file ) 
+(here is the code) 
+
+providers: [ 
+  {provide: 'BASE_API', useValue: environment.baseapi}, // for he base api token  
+  {provide:HTTP_INTERCEPTORS,
+    useClass:Apinterceptor,
+    multi:true // if the multipinterceptor exist then it excute multiple interceptor one by one 
+  }
+],   
+((here is the full and wrigth creation for the)) ,,(interceptor) --> 
+import { HttpInterceptor , HttpRequest,HttpHandler, HttpEvent} from "@angular/common/http";
+import { Inject, inject, Injectable } from "@angular/core";
+import { environment } from "../../../environments/environment.development";
+import { Observable } from "rxjs"; 
+import { Bast_API } from "../../token/bastUrl.token";
+
+@Injectable()
+export class  Apinterceptor implements HttpInterceptor{
+  constructor(@Inject(Bast_API) private apiUrl:string ){}
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+     if(!req.url.startsWith('http')){
+       const apireq = req.clone({
+         url:`${this.apiUrl}/${req.url}`  //basically we are modiyfining the url that we are sending from the backend 
+       });
+       return next.handle(apireq);
+     }
+     return next.handle(req);
+  }
+} 
+
+==================================================================== 
+here is the full creation of  the Effect  -------------->  
+
+import { Injectable } from '@angular/core';
+import { createEffect, ofType } from '@ngrx/effects';
+import { Actions } from '@ngrx/effects';
+import { loadCategory, loadCategoryFailed, loadCategorySuccess } from './catlog.action';
+import { catchError, map, mergeMap, of } from 'rxjs';
+import { CatalogService } from '../../Services/catlogservices.service';
+
+@Injectable()
+export class CatalogEffect {
+  constructor(
+    private action$: Actions,
+    private categoryServies: CatalogService
+  )
+  {} 
+
+ //
+
+  loadCategories$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(loadCategory), // When the action type is loadCategory
+      mergeMap(() =>
+        this.categoryServies.getCategories().pipe( // Correctly call the service method
+          map((res) => {
+            // Check if the response is successful
+            if (res.isSuccess === true) {
+              return loadCategorySuccess({ categories: res.data ?? [] });
+            } else {
+              return loadCategoryFailed({ error:res.message }); // Empty array if not successful
+            }
+          }), 
+          catchError((error) => of(loadCategoryFailed({ error }))) // Catch error if any
+        )
+      )
+    )
+  );
+}
+================================================================= 
+almost everything is done next we have to create the stores   
+here is the simpl creation of the store --> 
+import { CategoryState ,categoryReducer } from "../catalog/catlog.reducer";
+
+
+export interface AppState {
+  catlog: CategoryState;
+} 
+
+export const store ={
+  CatlogStore:categoryReducer // our store type is the 
+}
+((Now we have  to register the store in the app.module.ts file )) 
+here in the import we have   
+
+
+AppComponent
+],
+imports: [
+  BrowserModule,
+  AppRoutingModule ,
+  LayoutModule ,
+  StoreModule.forRoot(store) , //in the store we are defing the store 
+  EffectsModule.forRoot([CatalogEffect])   // it take the array of effect and currently we have only one effect 
+
+],
+====================================================== 
+In the header we are seding the hardcoded vlue now we get this value form the store 
+here is the code -->  
+export class HeaderComponent implements OnInit {
+   
+  categories$:Observable<CategroyDto[]>; // this will give us some error so for that  
+  // in the constructor we have to initialize this 
+
+ constructor(private store:Store<AppState>) { 
+     this.categories$ = this.store.select(store => store.catlog.categories);     
+   }  
+                    
+// public categories: string[] = [    'Electronic',
+//     'Phone',
+//     'Laptop',
+//     'Garment',
+//     'Shoes',
+//     'Furniture'
+//   ]; // this coming form the hardcode   
+    
+  ngOnInit(): void { // on Init we have to subsribe tge store  for the data 
+    this.categories$.pipe( 
+     tap((category) => {
+       if(category.length === 0){
+         this.store.dispatch(loadCategory());// if there is nothin in the store then we will call the loadCategory action  // then thing will comes into the store form the store we get that
+       }
+     }
+    )).subscribe();
+ }
+
+}
+========================================================================  
+here we have creted the selectors now we have to definr the slelectors --> 
+import { createFeatureSelector, createSelector } from "@ngrx/store";
+import { CategoryState } from "./catlog.reducer";
+ 
+            
+export const selectCatalogState = createFeatureSelector<CategoryState>('CatlogStore'); // catlog that we have given under the store   
+ 
+export const selectCategories = createSelector (
+     selectCatalogState, // it take the selectCatalogState 
+        (state:CategoryState) => state.categories // then it take the state fo catlog and then retur the stat.catergories 
+this will be given nto he selection  in the selct 
+
+here in the header ccomponent we have to change the code 
+
+( 
+export class HeaderComponent  {
+   
+  categories$:Observable<CategroyDto[]>; 
+ constructor(private store:Store<AppState>) { 
+     this.categories$ = this.store.select(selectCategories);   
+     console.log(this.categories$);   
+   }              
+} 
+    
+)
+  
+  
+
